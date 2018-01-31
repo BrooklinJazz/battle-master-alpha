@@ -10,7 +10,7 @@ class ClearCombatant extends Component {
     return (
       <button
         className="btn btn-default"
-        onClick={(e) => this.props.clearCombatants(e)}
+        onClick={() => this.props.clearCombatants()}
         >Clear Combatants</button>
     )
   }
