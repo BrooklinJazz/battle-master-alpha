@@ -92,6 +92,11 @@ export default function(state = INITIAL_STATE, action) {
       ...state,
       CombatantList: combatantsListAfterChange
     }
+    case Types.CLEAR_COMBATANTS:
+    console.log('CLEAR COMBATANTS REDUCER');
+    return {
+      ...state
+    }
     /****************************************
     Rolls
     ****************************************/
