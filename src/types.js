@@ -13,6 +13,7 @@ export const types = {
   FETCH_MONSTERS: "FETCH_MONSTERS",
   RENDER_SAVED_COMBAT: "RENDER_SAVED_COMBAT",
   UPDATE_FIGHTS: "UPDATE_FIGHTS"
+
 }
 
 export default types;

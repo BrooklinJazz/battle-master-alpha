@@ -35,9 +35,9 @@ class Fights extends Component {
       }
     )
     .then(res => res.json())
+
     .then(res => this.props.updateFights(res))
   }
-
   getFightJSON(fightId) {
     const {user = []} = this.props
     fetch(

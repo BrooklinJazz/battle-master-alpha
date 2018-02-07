@@ -20,8 +20,10 @@ export const Combat = {
         body: JSON.stringify(params)
       }
     )
+
     // NOTE commented this out because it prevented other .then statements
     // from running in SaveFight.js
     // .then(res => res.json())
+
   }
 }

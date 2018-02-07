@@ -192,6 +192,7 @@ export default function(state = INITIAL_STATE, action) {
       fights: action.payload
     }
 
+
   }
   return state;
 }

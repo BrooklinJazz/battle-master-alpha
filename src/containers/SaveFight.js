@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions/index"
 const BASE_URL = 'http://localhost:3000/api/v1'
 
+
 class SaveFight extends Component {
   constructor(props) {
     super(props)
@@ -14,11 +15,13 @@ class SaveFight extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getFights = this.getFights.bind(this);
+
   }
 
   handleChange(event) {
     this.setState({name: event.target.value});
   }
+
 
   getFights() {
     const {user = []} = this.props
@@ -34,6 +37,7 @@ class SaveFight extends Component {
     .then(res => res.json())
     .then(res => this.props.updateFights(res))
   }
+
 
 
   handleSubmit(event) {
