@@ -54,7 +54,9 @@ class Combatant extends Component {
               :
               <div
                 className="combatantInitiativeSelect"
-                onClick={this._onInitiativeSelectClick}>
+                onClick={this._onInitiativeSelectClick}
+                data-toggle="tooltip"
+                title="Change Combatant Initiative">
                 {
                   combatant.InitiativeRoll
                   ?
@@ -88,7 +90,9 @@ class Combatant extends Component {
                 :
                 <div
                   className="combatantDamageSelect"
-                  onClick={this._onDamageSelectClick}>
+                  onClick={this._onDamageSelectClick}
+                  data-toggle="tooltip"
+                  title="Change Combatant HP">
                   {combatant.currentHp}/{combatant.HP.Value}
                 </div>
               }

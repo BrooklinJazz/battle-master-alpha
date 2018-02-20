@@ -20,9 +20,10 @@
   border-radius: 10px;
 }
 .combatantInitiativeSelect:hover {
-  color:orange;
+  text-decoration: underline;
+  text-decoration-style: solid;
 }
-.monsterDamageSelect:hover {
+.combatantDamageSelect:hover {
   text-decoration: underline;
   text-decoration-style: solid;
 }
