@@ -7,14 +7,20 @@
 .initiativeRoll {
   color: green;
 }
-.monsterDamageInput {
+.combatantDamageInput {
   width: 60px;
 }
-.monsterDamageSelect {
+.combatantInitiativeInput {
+  width: 40px;
+}
+.combatantDamageSelect {
   color:green;
   text-align: center;
   margin: 0 25px 0 25px;
   border-radius: 10px;
+}
+.combatantInitiativeSelect:hover {
+  color:orange;
 }
 .monsterDamageSelect:hover {
   text-decoration: underline;
