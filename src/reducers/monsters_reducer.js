@@ -133,7 +133,6 @@ export default function(state = INITIAL_STATE, action) {
       CombatantList: combatantsAfterInitiativeRoll
     }
     case Types.RENDER_SAVED_COMBAT:
-    // console.log('RENDER_SAVED_COMBAT', action.payload);
     return {
       ...state,
       CombatantList: action.payload
@@ -162,7 +161,6 @@ export default function(state = INITIAL_STATE, action) {
     let dtwenty
     // this case creates a new Roll Component to be shown using the redux store for rolls. payload should be given in form similar to +5, or +12, or -6, or -13
     case Types.D20_ROLLED:
-    console.log(action.payload);
     // if the payload is positive
     if (parseInt(action.payload) >= 0) {
       // convert payload to be integer as modifier
@@ -271,7 +269,6 @@ export default function(state = INITIAL_STATE, action) {
     Rolls
     ****************************************/
     case Types.UPDATE_FIGHTS:
-    // console.log('UPDATE FIGHTS', action.payload);
     return {
       ...state,
       fights: action.payload

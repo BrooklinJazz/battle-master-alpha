@@ -147,7 +147,6 @@ class Combatant extends Component {
       e.preventDefault();
       const {combatant = {}, index} = this.props;
       const {initiativeChange} = this.state
-      console.log('initiative form ', initiativeChange);
       this.props.changeCombatantInitiative({combatant, initiativeChange, index})
       this.setState({showInitiativeInput: false});
     }
