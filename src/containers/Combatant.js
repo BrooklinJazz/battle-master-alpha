@@ -31,7 +31,7 @@ class Combatant extends Component {
     const {combatant = {}, index} = this.props;
 
     return (
-      <tr class="Combatant"
+      <tr className="Combatant"
         onClick={() => this.props.selectCombatant(combatant)}>
         <th
           className="col-xs-1"
