@@ -31,7 +31,7 @@ import SignInPage from '../containers/SignInPage'
 import Fights from '../containers/Fights'
 import SaveFight from '../containers/SaveFight'
 
-const serverUrl = 'http://ec2-18-217-99-170.us-east-2.compute.amazonaws.com:3000/api/v1/monsters'
+const SERVER_URL = 'http://ec2-18-217-99-170.us-east-2.compute.amazonaws.com:3000/api/v1/monsters'
 const BASE_URL = 'http://ec2-18-217-99-170.us-east-2.compute.amazonaws.com:3000/api/v1'
 
 class App extends Component {
@@ -68,7 +68,7 @@ class App extends Component {
   componentDidMount() {
     // get monster data for MonsterList
     fetch(
-      serverUrl,
+      SERVER_URL,
       {
         method: 'GET',
         headers: {

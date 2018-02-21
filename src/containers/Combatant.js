@@ -23,6 +23,7 @@ class Combatant extends Component {
   }
 
   onClickOutInitiativeInput(e) {
+    console.log('ow');
     this.setState({showInitiativeInput: false});
   }
 
@@ -42,7 +43,7 @@ class Combatant extends Component {
             <form
               onClick={(e) => e.stopPropagation()}
               onSubmit={(e) => this._InitiativeFormSubmit(e)}>
-              <ClickOutHandler onClickOutInitiativeInput={this.onClickOutInitiativeInput}>
+              <ClickOutHandler onClickOut={this.onClickOutInitiativeInput}>
                 <input
                   className="combatantInitiativeInput"
                   type="number"
@@ -78,7 +79,7 @@ class Combatant extends Component {
               <form
                 onClick={(e) => e.stopPropagation()}
                 onSubmit={(e) => this._DamageFormSubmit(e)}>
-                <ClickOutHandler onClickOutDamageInput={this.onClickOutDamageInput}>
+                <ClickOutHandler onClickOut={this.onClickOutDamageInput}>
                   <input
                     className="combatantDamageInput"
                     type="number"
