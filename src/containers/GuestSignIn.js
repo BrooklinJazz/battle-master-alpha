@@ -26,7 +26,7 @@ class GuestSignIn extends Component {
 
   render() {
     return (
-      <div onClick={() => this.signIn()}>log in as guest</div>
+      <div className="GuestSignIn" onClick={() => this.signIn()}>or log in as guest</div>
     )
   }
 

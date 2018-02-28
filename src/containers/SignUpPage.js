@@ -125,7 +125,7 @@ class SignUpPage extends Component {
 
 
               <div>
-                <input type='submit' value='Sign Up'/>
+                <input className="submit" type='submit' value='Sign Up'/>
               </div>
             </form>
           </main>

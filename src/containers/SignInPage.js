@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Token} from '../requests/tokens';
 import GuestSignIn from './GuestSignIn';
+import { Button, Input, InputGroupAddon, InputGroup } from 'reactstrap';
 
 class SignInPage extends Component {
   constructor (props) {
@@ -33,7 +34,6 @@ class SignInPage extends Component {
           localStorage.setItem('jwt', jwt);
           onSignIn();
           this.setState({email: "", password: ""});
-
           this.props.history.push("/");
         }
       });
@@ -54,25 +54,27 @@ class SignInPage extends Component {
 
     return (
       <main
-        className="SignInPage col-sm-offset-5 col-sm-2"
+        className="SignInPage SignMain col-sm-offset-4 col-sm-4"
 
       >
         <form onSubmit={this.createToken} className="signInForm">
           <h2>Sign In</h2>
           <div>
-            <label htmlFor='email'>Email</label> <br />
-            <input
-              value={email}
-              onChange={this.handleChange('email')}
-              type='email'
-              id='email'
-              name='email'
-            />
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">Email</InputGroupAddon>
+              <Input
+                value={email}
+                onChange={this.handleChange('email')}
+                type='email'
+                id='email'
+                name='email'
+              />
+            </InputGroup>
           </div>
 
           <div>
             <label htmlFor='password'>Password</label> <br />
-            <input
+            <Input
               value={password}
               onChange={this.handleChange('password')}
               type='password'
@@ -82,7 +84,7 @@ class SignInPage extends Component {
           </div>
 
           <div>
-            <input type='submit' value='Sign In'/>
+            <Button className="submit" type='submit'>Sign In</Button>
           </div>
           <GuestSignIn onSignIn={this.props.onSignIn} history={this.props.history} />
         </form>
