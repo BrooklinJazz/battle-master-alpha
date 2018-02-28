@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Token} from '../requests/tokens';
+import GuestSignIn from './GuestSignIn';
 
 class SignInPage extends Component {
   constructor (props) {
@@ -83,6 +84,7 @@ class SignInPage extends Component {
           <div>
             <input type='submit' value='Sign In'/>
           </div>
+          <GuestSignIn onSignIn={this.props.onSignIn} history={this.props.history} />
         </form>
       </main>
     )
