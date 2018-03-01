@@ -8,7 +8,6 @@ class GuestSignIn extends Component {
 
   signIn() {
     event.preventDefault();
-    console.log('Sign In Working');
     const email = 'guest@guest.com'
     const password = 'guest'
     const {onSignIn = () => {}} = this.props;
@@ -26,7 +25,7 @@ class GuestSignIn extends Component {
 
   render() {
     return (
-      <div className="GuestSignIn" onClick={() => this.signIn()}>or log in as guest</div>
+      <div className="GuestSignIn" onClick={() => this.signIn()}>or sign in as guest</div>
     )
   }
 

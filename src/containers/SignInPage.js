@@ -73,14 +73,16 @@ class SignInPage extends Component {
           </div>
 
           <div>
-            <label htmlFor='password'>Password</label> <br />
-            <Input
-              value={password}
-              onChange={this.handleChange('password')}
-              type='password'
-              id='password'
-              name='password'
-            />
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">Password</InputGroupAddon>
+              <Input
+                value={password}
+                onChange={this.handleChange('password')}
+                type='password'
+                id='password'
+                name='password'
+              />
+            </InputGroup>
           </div>
 
           <div>
