@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import * as actions from "../actions/index"
 // import DamageInput from "../components/damage-input";
 import Combatant from "../containers/Combatant"
@@ -10,27 +10,36 @@ import ClearCombat from './ClearCombat'
 import FontAwesome from 'react-fontawesome'
 import Rolls from './Rolls'
 
-
-// import { selectCombatant } from '../actions/index';
-// import { bindActionCreators} from 'redux';
-
-// let CombatantListArr = []
 class CombatantList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      groupMonsters: false,
+    }
+    this.toggleGroupMonsters = this.toggleGroupMonsters.bind(this);
   }
 
-// renders a list of Combatants
+  toggleGroupMonsters() {
+    console.log('toggled G Monster');
+    if (this.state.groupMonsters) {
+      this.setState({ groupMonsters: false })
+    } else {
+      this.setState({ groupMonsters: true })
+    }
+  }
+
+  // renders a list of Combatants
   renderList() {
-    const {CombatantList = []} = this.props
+    const { CombatantList = [] } = this.props
     return CombatantList.map((combatant, index) => {
       return (
-            <Combatant key={index} combatant={combatant} index={index}/>
+        <Combatant key={index} combatant={combatant} index={index} />
       )
     });
   }
-// if there are no combatants Do not render the list
+  // if there are no combatants Do not render the list
   render() {
+    const { groupMonsters } = this.state
     if (!CombatantList) {
       return <div>Select a CombatantList to get started</div>;
     }
@@ -43,13 +52,35 @@ class CombatantList extends Component {
               <th className="col-xs-1" data-toggle="tooltip" title="Roll Initiative">
                 <InitiativeRoll />
               </th>
-              <th className="col-xs-4" data-toggle="tooltip" title="Monster Names">
-                <FontAwesome
-                  name="optin-monster"
-                  size="2x"
-                  style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-                />
-              </th>
+              {
+                groupMonsters ?
+                  <th
+                    className="col-xs-4 ungroupMonsters"
+                    data-toggle="tooltip"
+                    title="Ungroup Monsters"
+                    onClick={() => this.toggleGroupMonsters()}
+                  >
+                    <FontAwesome
+                      name="optin-monster"
+                      size="2x"
+                      style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)'}}
+                    />
+                  </th>
+                  :
+                  <th
+                    className="col-xs-4 groupMonsters"
+                    data-toggle="tooltip"
+                    title="Group Monsters"
+                    onClick={() => this.toggleGroupMonsters()}>
+                    <FontAwesome
+                      name="optin-monster"
+                      size="2x"
+                      style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+
+                    />
+                  </th>
+
+              }
               <th className="col-xs-3 textCenter" data-toggle="tooltip" title="Hit Points">
                 <FontAwesome
                   name="heart"
@@ -83,8 +114,8 @@ class CombatantList extends Component {
 // anything in mapStateToProps will be this.props in the container above.
 // this.props.CombatantList is the array of monster combatants
 function mapStateToProps(state) {
-  const {CombatantList} = state.monsters;
-  return {CombatantList};
+  const { CombatantList } = state.monsters;
+  return { CombatantList };
 }
 
 function mapDispatchToProps(dispatch) {

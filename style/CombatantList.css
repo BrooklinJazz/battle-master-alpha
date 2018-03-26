@@ -41,3 +41,12 @@
   height:calc(100vh - 55px);
   overflow: scroll;
 }
+.ungroupMonsters {
+  color: green
+}
+.groupMonsters:hover {
+  color: orange
+}
+.ungroupMonsters:hover {
+  color: orange
+}

@@ -41,6 +41,7 @@ export default function(state = INITIAL_STATE, action) {
     ****************************************/
     case Types.MONSTER_SELECTED:
     return { ...state, selectedMonster: action.combatant };
+    
     // add a Monster obj to the CombatantList
     case Types.ADD_MONSTER_TO_COMBATANTS:
     newCombatant = deepClone(action.monster);
@@ -114,6 +115,8 @@ export default function(state = INITIAL_STATE, action) {
       CombatantList: []
     }
     case Types.ROLL_INITIATIVES:
+    // expect action.payload to be grouped.
+    
     newCombatantList = [...state.CombatantList]
     const combatantsAfterInitiativeRoll = newCombatantList.map( monster => {
       return {

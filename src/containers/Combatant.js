@@ -23,7 +23,6 @@ class Combatant extends Component {
   }
 
   onClickOutInitiativeInput(e) {
-    console.log('ow');
     this.setState({showInitiativeInput: false});
   }
 
