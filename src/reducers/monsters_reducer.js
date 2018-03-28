@@ -136,9 +136,23 @@ export default function(state = INITIAL_STATE, action) {
     case Types.ROLL_INITIATIVES:
     newCombatantList = [...state.CombatantList]
     const combatantsAfterInitiativeRoll = newCombatantList.map( monster => {
+      if (monster.Group) {
+        monster.Combatants = monster.Combatants.map( combatant => {
+          return {
+            ...combatant,
+            InitiativeRoll: d20() + convScoreToMod(combatant.Abilities.Dex)
+          }
+        })
+
+        return {
+          ...monster,
+          // May want to add a modifier for the group of monsters
+          InitiativeRoll: d20()
+        }
+      }
       return {
         ...monster,
-        InitiativeRoll: d20() + convScoreToMod(monster.Abilities ? monster.Abilities.Dex : 10)
+        InitiativeRoll: d20() + convScoreToMod(monster.Abilities.Dex)
       }
       // below was replaced with the above because the deeper values of each monster object
       // were pointing to redux state. this was causing rendering issues and mutation of
