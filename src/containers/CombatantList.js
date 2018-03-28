@@ -33,7 +33,7 @@ class CombatantList extends Component {
                 return <tbody><Combatant key={index} combatant={combatant} index={index} /></tbody>
               } else {
                 // return CombatantGroup
-                return <CombatantGroup key={index} parentObj={combatant} />
+                return <CombatantGroup key={index} parentObj={combatant} index={index} />
               }
             })
         )
