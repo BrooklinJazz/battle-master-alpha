@@ -138,7 +138,7 @@ export default function(state = INITIAL_STATE, action) {
     const combatantsAfterInitiativeRoll = newCombatantList.map( monster => {
       return {
         ...monster,
-        InitiativeRoll: d20() + convScoreToMod(monster.Abilities.Dex)
+        InitiativeRoll: d20() + convScoreToMod(monster.Abilities ? monster.Abilities.Dex : 10)
       }
       // below was replaced with the above because the deeper values of each monster object
       // were pointing to redux state. this was causing rendering issues and mutation of
