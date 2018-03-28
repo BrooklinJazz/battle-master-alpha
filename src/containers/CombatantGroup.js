@@ -26,46 +26,48 @@ class CombatantGroup extends Component {
         const { Combatants, InitiativeRoll } = this.props.parentObj
         return (
             <tbody>
-                <tr>
+            <td className="groupMonsterBumper"></td>
+            <tr>
                     <th
-                        className="col-xs-3"
+                        className="col-xs-1"
                         scope="row">
+                        {
+                            this.state.showInitiativeInput
+                                ?
+                                <form
+                                    onClick={(e) => e.stopPropagation()}
+                                    onSubmit={(e) => this._InitiativeFormSubmit(e)}>
+                                    <ClickOutHandler onClickOut={this.onClickOutInitiativeInput}>
+                                        <input
+                                            className="combatantInitiativeInput"
+                                            type="number"
+                                            autoFocus
+                                            name="initiativeChange"
+                                            onChange={(e) => this._handleChange(e)} />
+                                    </ClickOutHandler>
+                                </form>
+                                :
+                                <div
+                                    className="combatantInitiativeSelect"
+                                    onClick={this._onInitiativeSelectClick}
+                                    data-toggle="tooltip"
+                                    title="Change Combatant Initiative">
+                                    {
+                                        InitiativeRoll
+                                    }
+                                </div>
+                        }
+                    </th>
+                    <th
+                    className="col-xs-11">
                         Monsters
                     </th>
-                    <td
-                    className="col-xs-9">
-                    {
-                        this.state.showInitiativeInput
-                            ?
-                            <form
-                                onClick={(e) => e.stopPropagation()}
-                                onSubmit={(e) => this._InitiativeFormSubmit(e)}>
-                                <ClickOutHandler onClickOut={this.onClickOutInitiativeInput}>
-                                    <input
-                                        className="combatantInitiativeInput"
-                                        type="number"
-                                        autoFocus
-                                        name="initiativeChange"
-                                        onChange={(e) => this._handleChange(e)} />
-                                </ClickOutHandler>
-                            </form>
-                            :
-                            <div
-                                className="combatantInitiativeSelect"
-                                onClick={this._onInitiativeSelectClick}
-                                data-toggle="tooltip"
-                                title="Change Combatant Initiative">
-                                {
-                                    InitiativeRoll
-                                }
-                            </div>
-                    }
-                    </td>
 
                 </tr>
                 {Combatants.map((combatant, index) => (
                     <GroupedCombatant key={index} combatant={combatant} index={index} />
                 ))}
+                <td className="groupMonsterBumper"></td>
             </tbody>
         )
     }
