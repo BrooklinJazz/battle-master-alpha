@@ -11,34 +11,27 @@ import FontAwesome from 'react-fontawesome'
 import Rolls from './Rolls'
 
 class CombatantList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      groupMonsters: false,
-    }
-    this.toggleGroupMonsters = this.toggleGroupMonsters.bind(this);
-  }
-
-  toggleGroupMonsters() {
-    if (this.state.groupMonsters) {
-      this.setState({ groupMonsters: false })
-    } else {
-      this.setState({ groupMonsters: true })
-    }
-  }
 
   // renders a list of Combatants
   renderList() {
-    const { CombatantList = [] } = this.props
-    return CombatantList.map((combatant, index) => {
-      if (!!combatant.Group) {
-        
+    const { CombatantList = [], GroupMonsters } = this.props
+      if (!GroupMonsters) {
+        return CombatantList.map((combatant, index) => {
+            return (
+              <Combatant key={index} combatant={combatant} index={index} />
+            )
+        })
       } else {
-        return (
-          <Combatant key={index} combatant={combatant} index={index} />
-        )
+        return CombatantList.sort( (a, b) => {
+          return a.InitiativeRoll - b.InitiativeRoll
+        }).map( (combatant, index) => {
+          if (combatant.Group !== true) {
+            return <Combatant key={index} combatant={combatant} index={index} />
+          } else {
+            // return CombatantGroup
+          }
+        })
       }
-    });
   }
   // if there are no combatants Do not render the list
   render() {
