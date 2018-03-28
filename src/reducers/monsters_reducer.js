@@ -43,7 +43,7 @@ export default function(state = INITIAL_STATE, action) {
     ****************************************/
     case Types.MONSTER_SELECTED:
     return { ...state, selectedMonster: action.combatant };
-    
+
     // add a Monster obj to the CombatantList
     case Types.ADD_MONSTER_TO_COMBATANTS:
     newCombatant = deepClone(action.monster);
@@ -51,14 +51,15 @@ export default function(state = INITIAL_STATE, action) {
     newCombatant.currentHp = newCombatant.HP.Value
     if (!!state.GroupMonsters && newCombatant.Challenge) {
       newCombatantList = [...state.CombatantList]
-      
       const combatantListAfterAddingCombatantToGroup = newCombatantList.map( monster => {
         if (!!monster.Group) {
-          return monster.Combatants.concat(newCombatant)
+          monster.Combatants = monster.Combatants.concat(newCombatant)
+          return monster
         } else {
           return monster
         }
       })
+
 
       return {
         ...state,
@@ -188,7 +189,7 @@ export default function(state = INITIAL_STATE, action) {
         }
       })
       const combatantListAfterGrouping = ungroupedMonsters.concat(groupedMonsters)
-      
+
       return {
         ...state,
         GroupMonsters: action.payload,
@@ -204,7 +205,7 @@ export default function(state = INITIAL_STATE, action) {
         }
       })
       const combatantListAfterFlattening = flatten(combatantListBeforeFlattening)
-      
+
       return {
         ...state,
         GroupMonsters: action.payload,

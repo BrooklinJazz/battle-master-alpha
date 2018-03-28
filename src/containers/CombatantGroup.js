@@ -92,8 +92,8 @@ class CombatantGroup extends Component {
 }
 
 function mapStateToProps(state) {
-    const { selectedMonster } = state.monsters;
-    return { selectedMonster };
+    const { CombatantList } = state.monsters;
+    return { CombatantList };
 }
 
 function mapDispatchToProps(dispatch) {
