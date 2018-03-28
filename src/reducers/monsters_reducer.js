@@ -51,14 +51,15 @@ export default function(state = INITIAL_STATE, action) {
     newCombatant.currentHp = newCombatant.HP.Value
     if (!!state.GroupMonsters) {
       newCombatantList = [...state.CombatantList]
+      
       const combatantListAfterAddingCombatantToGroup = newCombatantList.map( monster => {
         if (!!monster.Group) {
-          monster.Combatants.concat(newCombatant)
-          return monster
+          return monster.Combatants.concat(newCombatant)
         } else {
           return monster
         }
       })
+
       return {
         ...state,
         CombatantList: combatantListAfterAddingCombatantToGroup
@@ -173,6 +174,7 @@ export default function(state = INITIAL_STATE, action) {
         }
       })
       const combatantListAfterGrouping = ungroupedMonsters.concat(groupedMonsters)
+      
       return {
         ...state,
         GroupMonsters: action.payload,
@@ -188,6 +190,7 @@ export default function(state = INITIAL_STATE, action) {
         }
       })
       const combatantListAfterFlattening = flatten(combatantListBeforeFlattening)
+      
       return {
         ...state,
         GroupMonsters: action.payload,

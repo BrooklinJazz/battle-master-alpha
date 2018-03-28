@@ -32,7 +32,7 @@ class CombatantList extends Component {
     const { CombatantList = [] } = this.props
     return CombatantList.map((combatant, index) => {
       if (!!combatant.Group) {
-        // TODO handle Conditional Rendering
+        
       } else {
         return (
           <Combatant key={index} combatant={combatant} index={index} />
