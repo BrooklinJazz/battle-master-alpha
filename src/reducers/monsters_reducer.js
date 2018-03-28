@@ -140,10 +140,47 @@ export default function(state = INITIAL_STATE, action) {
       CombatantList: action.payload
     }
     case Types.TOGGLE_GROUPING_MONSTERS:
-    return {
-      ...state,
-      GroupMonsters: action.payload
+    // re-organize CombatantList to have a grouped object with it's own InitiativeRoll
+    // property
+    if (!!action.payload) {
+      newCombatantList = [...state.CombatantList]
+      const groupedMonsters = {InitiativeRoll: 0, Combatants: [], Group: true}
+      groupedMonsters.Combatants = newCombatantList.filter( monster => {
+        if (monster.Challenge) {
+          return monster
+        }
+      })
+      const ungroupedMonsters = newCombatantList.filter( monster => {
+        if (!monster.Challenge) {
+          return monster
+        }
+      })
+      const combatantListAfterGrouping = ungroupedMonsters.concat(groupedMonsters)
+      return {
+        ...state,
+        GroupMonsters: action.payload,
+        CombatantList: combatantListAfterGrouping
+      }
+    } else {
+      newCombatantList = [...state.CombatantList]
+      const combatantListAfterFlatteningGroup = newCombatantList.map( monster => {
+        if (!!monster.Group) {
+          for (const combatant of monster.Combatants) {
+            return combatant
+          }
+        } else {
+          return monster
+        }
+      })
+      return {
+        ...state,
+        GroupMonsters: action.payload,
+        CombatantList: combatantListAfterFlatteningGroup
+
+
+      }
     }
+
     /****************************************
     Rolls
     ****************************************/
