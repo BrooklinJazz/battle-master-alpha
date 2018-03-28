@@ -8,29 +8,35 @@ import { Table } from 'reactstrap';
 import InitiativeRoll from './InitiativeRoll'
 import ClearCombat from './ClearCombat'
 import FontAwesome from 'react-fontawesome'
-import Rolls from './Rolls'
+import Rolls from './Rolls';
+import CombatantGroup from './CombatantGroup';
 
 class CombatantList extends Component {
 
-  // renders a list of Combatants
+  // renders a list of Combatants or CombatantGroup
   renderList() {
     const { CombatantList = [], GroupMonsters } = this.props
       if (!GroupMonsters) {
-        return CombatantList.map((combatant, index) => {
-            return (
-              <Combatant key={index} combatant={combatant} index={index} />
-            )
-        })
+        return (
+            CombatantList.map((combatant, index) => {
+                return (
+                  <tbody><Combatant key={index} combatant={combatant} index={index} /></tbody>
+                )
+            })
+        )
       } else {
-        return CombatantList.sort( (a, b) => {
-          return a.InitiativeRoll - b.InitiativeRoll
-        }).map( (combatant, index) => {
-          if (combatant.Group !== true) {
-            return <Combatant key={index} combatant={combatant} index={index} />
-          } else {
-            // return CombatantGroup
-          }
-        })
+        return (
+            CombatantList.sort( (a, b) => {
+              return a.InitiativeRoll - b.InitiativeRoll
+            }).map( (combatant, index) => {
+              if (combatant.Group !== true) {
+                return <tbody><Combatant key={index} combatant={combatant} index={index} /></tbody>
+              } else {
+                // return CombatantGroup
+                return <CombatantGroup key={index} parentObj={combatant} />
+              }
+            })
+        )
       }
   }
   // if there are no combatants Do not render the list
@@ -96,9 +102,7 @@ class CombatantList extends Component {
               <th className="col-xs-2" data-toggle="tooltip" title="Clear Combat"><ClearCombat /></th>
             </tr>
           </thead>
-          <tbody>
             {this.renderList()}
-          </tbody>
         </Table>
         <Rolls />
       </div>
