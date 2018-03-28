@@ -27,7 +27,7 @@ class CombatantList extends Component {
       } else {
         return (
             CombatantList.sort( (a, b) => {
-              return a.InitiativeRoll - b.InitiativeRoll
+              return b.InitiativeRoll - a.InitiativeRoll
             }).map( (combatant, index) => {
               if (combatant.Group !== true) {
                 return <tbody><Combatant key={index} combatant={combatant} index={index} /></tbody>

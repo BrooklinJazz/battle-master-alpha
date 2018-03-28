@@ -49,7 +49,7 @@ export default function(state = INITIAL_STATE, action) {
     newCombatant = deepClone(action.monster);
     // add the currentHp to combatant object to show current/max health
     newCombatant.currentHp = newCombatant.HP.Value
-    if (!!state.GroupMonsters && newCombatant.Challenge !== "undefined") {
+    if (!!state.GroupMonsters && newCombatant.Challenge) {
       newCombatantList = [...state.CombatantList]
       
       const combatantListAfterAddingCombatantToGroup = newCombatantList.map( monster => {

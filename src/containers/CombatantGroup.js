@@ -9,10 +9,6 @@ import Combatant from './Combatant';
 class CombatantGroup extends Component {
     state = {}
 
-    componentWillMount() {
-        console.log(this.props);
-    }
-
     renderList() {
         const { Combatants } = this.props.parentObj
         let returnArray = []
@@ -26,14 +22,21 @@ class CombatantGroup extends Component {
             return <Combatant key={index} combatant={combatant} index={index} />
         })
     }
-    
     render() {
-        const { Combatants } = this.props.parentObj
+        const { Combatants, InitiativeRoll } = this.props.parentObj
         return (
             <tbody>
-           { Combatants.map((combatant, index) => (
-                <Combatant key={index} combatant={combatant} index={index} />
-            ))}
+                <tr>
+                    <th
+                        className="col-xs-3"
+                        scope="row">
+                        Monsters
+                    </th>
+                    <td className="col-xs-9">{InitiativeRoll}</td>
+                </tr>
+                {Combatants.map((combatant, index) => (
+                    <Combatant key={index} combatant={combatant} index={index} />
+                ))}
             </tbody>
         )
     }
