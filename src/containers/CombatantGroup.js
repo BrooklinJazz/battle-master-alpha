@@ -4,7 +4,7 @@ import * as actions from "../actions/index"
 import FontAwesome from 'react-fontawesome'
 import ClickOutHandler from 'react-onclickout'
 
-import Combatant from './Combatant';
+import GroupedCombatant from './GroupedCombatant';
 
 class CombatantGroup extends Component {
     constructor(props) {
@@ -64,7 +64,7 @@ class CombatantGroup extends Component {
 
                 </tr>
                 {Combatants.map((combatant, index) => (
-                    <Combatant key={index} combatant={combatant} index={index} />
+                    <GroupedCombatant key={index} combatant={combatant} index={index} />
                 ))}
             </tbody>
         )
@@ -92,6 +92,7 @@ class CombatantGroup extends Component {
 }
 
 function mapStateToProps(state) {
+    // must watch CombatantList to know when to re-render itself if a monster is added to the group
     const { CombatantList } = state.monsters;
     return { CombatantList };
 }
@@ -100,17 +101,8 @@ function mapDispatchToProps(dispatch) {
     // Whenever selectCombatant is called, the result should be passed to all
     // of our reducers
     return {
-        selectCombatant: combatant =>
-            dispatch(actions.selectCombatant(combatant)),
-
-        changeCombatantHp: combatant =>
-            dispatch(actions.changeCombatantHp(combatant)),
-
         changeCombatantInitiative: combatant =>
             dispatch(actions.changeCombatantInitiative(combatant)),
-
-        removeCombatant: combatant =>
-            dispatch(actions.removeCombatant(combatant))
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CombatantGroup);

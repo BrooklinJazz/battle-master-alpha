@@ -103,7 +103,7 @@ class Combatant extends Component {
         </td>
         <td className="col-xs-2">
           <FontAwesome
-            onClick={() => this.props.clearCombatants()}
+            // onClick={() => this.props.clearCombatants()}
             className="clearCombatant"
             name='minus-circle'
             size='2x'

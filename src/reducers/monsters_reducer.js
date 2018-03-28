@@ -14,6 +14,7 @@ import {
   limitMonsterHpChange,
   flatten
 } from "../helpers"
+import { log } from "util";
 // the array of monster objects exported as a function.
 // NOTE storing monsters in a local file currently
 const monsters = monstersData()
@@ -105,6 +106,33 @@ export default function(state = INITIAL_STATE, action) {
       CombatantList: combatantsListAfterRemove
     };
     case Types.CHANGE_COMBATANT_HP:
+    newCombatantList = [...state.CombatantList]
+    if (state.GroupMonsters && !!action.payload.fromGrouped) {
+      // NOTE this would have to be adjusted to expect multiple groups in the future
+      // find grouped combatants
+      const GroupedCombatants = newCombatantList.find( combatantGroup => { !!combatantGroup.Group})
+      // find combatant at action.payload.index
+      const combatantsListAfterDamageChange = newCombatantList.map((combatantGroup, index) => {
+        if (combatantGroup.Group) {
+          combatantGroup.Combatants = combatantGroup.Combatants.map( (combatant, index) => {
+            if (index === action.payload.index) {
+              return limitMonsterHpChange(index, combatant, action.payload)
+            } else {
+              return combatant
+            }
+          })
+          return combatantGroup
+        }
+        return combatantGroup
+      })
+      // reduce combatant health by action.payload.hpChange, limit the reduction
+      // return after changes
+      return {
+        ...state,
+        CombatantList: combatantsListAfterDamageChange
+      }
+      
+    }
     const combatantsListAfterDamageChange = state.CombatantList.map( (combatant, i) => {
       return limitMonsterHpChange(i, combatant, action.payload)
     })
