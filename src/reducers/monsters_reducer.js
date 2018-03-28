@@ -24,7 +24,8 @@ const INITIAL_STATE = {
   searchTerm: '',
   rolls: [],
   fights: [],
-  players: []
+  players: [],
+  GroupMonsters: false,
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -115,8 +116,6 @@ export default function(state = INITIAL_STATE, action) {
       CombatantList: []
     }
     case Types.ROLL_INITIATIVES:
-    // expect action.payload to be grouped.
-    
     newCombatantList = [...state.CombatantList]
     const combatantsAfterInitiativeRoll = newCombatantList.map( monster => {
       return {
@@ -139,6 +138,11 @@ export default function(state = INITIAL_STATE, action) {
     return {
       ...state,
       CombatantList: action.payload
+    }
+    case Types.TOGGLE_GROUPING_MONSTERS:
+    return {
+      ...state,
+      GroupMonsters: action.payload
     }
     /****************************************
     Rolls

@@ -20,7 +20,6 @@ class CombatantList extends Component {
   }
 
   toggleGroupMonsters() {
-    console.log('toggled G Monster');
     if (this.state.groupMonsters) {
       this.setState({ groupMonsters: false })
     } else {
@@ -39,7 +38,7 @@ class CombatantList extends Component {
   }
   // if there are no combatants Do not render the list
   render() {
-    const { groupMonsters } = this.state
+    const { GroupMonsters } = this.props
     if (!CombatantList) {
       return <div>Select a CombatantList to get started</div>;
     }
@@ -53,12 +52,12 @@ class CombatantList extends Component {
                 <InitiativeRoll />
               </th>
               {
-                groupMonsters ?
+                GroupMonsters ?
                   <th
                     className="col-xs-4 ungroupMonsters"
                     data-toggle="tooltip"
                     title="Ungroup Monsters"
-                    onClick={() => this.toggleGroupMonsters()}
+                    onClick={() => this.props.toggleGroupingMonsters(false)}
                   >
                     <FontAwesome
                       name="optin-monster"
@@ -71,7 +70,7 @@ class CombatantList extends Component {
                     className="col-xs-4 groupMonsters"
                     data-toggle="tooltip"
                     title="Group Monsters"
-                    onClick={() => this.toggleGroupMonsters()}>
+                    onClick={() => this.props.toggleGroupingMonsters(true)}>
                     <FontAwesome
                       name="optin-monster"
                       size="2x"
@@ -114,8 +113,8 @@ class CombatantList extends Component {
 // anything in mapStateToProps will be this.props in the container above.
 // this.props.CombatantList is the array of monster combatants
 function mapStateToProps(state) {
-  const { CombatantList } = state.monsters;
-  return { CombatantList };
+  const { CombatantList, GroupMonsters } = state.monsters;
+  return { CombatantList, GroupMonsters };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -124,7 +123,8 @@ function mapDispatchToProps(dispatch) {
   return {
     // selectCombatant: monster => dispatch(actions.selectCombatant(monster)),
     changeCombatantHp: monster => dispatch(actions.changeCombatantHp(monster)),
-    removeCombatant: monster => dispatch(actions.removeCombatant(monster))
+    removeCombatant: monster => dispatch(actions.removeCombatant(monster)),
+    toggleGroupingMonsters: payload => dispatch(actions.toggleGroupingMonsters(payload)),
   };
 }
 
