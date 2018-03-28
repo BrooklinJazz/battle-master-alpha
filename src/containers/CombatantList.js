@@ -31,9 +31,13 @@ class CombatantList extends Component {
   renderList() {
     const { CombatantList = [] } = this.props
     return CombatantList.map((combatant, index) => {
-      return (
-        <Combatant key={index} combatant={combatant} index={index} />
-      )
+      if (!!combatant.Group) {
+        // TODO handle Conditional Rendering
+      } else {
+        return (
+          <Combatant key={index} combatant={combatant} index={index} />
+        )
+      }
     });
   }
   // if there are no combatants Do not render the list

@@ -11,7 +11,8 @@ import {
   getSidesOfDice,
   getModifier,
   rollSidedDice,
-  limitMonsterHpChange
+  limitMonsterHpChange,
+  flatten
 } from "../helpers"
 // the array of monster objects exported as a function.
 // NOTE storing monsters in a local file currently
@@ -48,10 +49,26 @@ export default function(state = INITIAL_STATE, action) {
     newCombatant = deepClone(action.monster);
     // add the currentHp to combatant object to show current/max health
     newCombatant.currentHp = newCombatant.HP.Value
-    return {
-      ...state,
-      CombatantList: state.CombatantList.concat(newCombatant)
-    };
+    if (!!state.GroupMonsters) {
+      newCombatantList = [...state.CombatantList]
+      const combatantListAfterAddingCombatantToGroup = newCombatantList.map( monster => {
+        if (!!monster.Group) {
+          monster.Combatants.concat(newCombatant)
+          return monster
+        } else {
+          return monster
+        }
+      })
+      return {
+        ...state,
+        CombatantList: combatantListAfterAddingCombatantToGroup
+      }
+    } else {
+      return {
+        ...state,
+        CombatantList: state.CombatantList.concat(newCombatant)
+      };
+    }
     case Types.FILTER_MONSTER_LIBRARY:
     return {
       ...state,
@@ -163,19 +180,18 @@ export default function(state = INITIAL_STATE, action) {
       }
     } else {
       newCombatantList = [...state.CombatantList]
-      const combatantListAfterFlatteningGroup = newCombatantList.map( monster => {
+      const combatantListBeforeFlattening = newCombatantList.map( monster => {
         if (!!monster.Group) {
-          for (const combatant of monster.Combatants) {
-            return combatant
-          }
+          return monster.Combatants
         } else {
           return monster
         }
       })
+      const combatantListAfterFlattening = flatten(combatantListBeforeFlattening)
       return {
         ...state,
         GroupMonsters: action.payload,
-        CombatantList: combatantListAfterFlatteningGroup
+        CombatantList: combatantListAfterFlattening
 
 
       }
