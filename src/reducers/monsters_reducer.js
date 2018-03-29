@@ -93,6 +93,27 @@ export default function(state = INITIAL_STATE, action) {
     let newCombatant
     let newCombatantList
     case Types.REMOVE_COMBATANT:
+    newCombatantList = [...state.CombatantList]
+    if (state.GroupMonsters && !!action.payload.fromGrouped) {
+      const combatantsListAfterRemove = newCombatantList.map((combatantGroup) => {
+        if (combatantGroup.Group) {
+          let combatantsArrayAfterRemove = combatantGroup.Combatants.filter( (combatant) => (
+            action.payload.index !== combatantGroup.Combatants.indexOf(combatant)
+        ))
+          console.log('Combatants Array After', combatantsArrayAfterRemove);
+          
+          return {
+            ...combatantGroup,
+            Combatants: combatantsArrayAfterRemove
+          }
+        }
+        return combatantGroup
+      })
+      return {
+        ...state,
+        CombatantList: combatantsListAfterRemove
+      }
+    }
     // assign a constant to be equal to CombatantList.
     // using map to avoid mutating state.
     const combatantsListAfterRemove = state.CombatantList.map( (combatant, i) => {

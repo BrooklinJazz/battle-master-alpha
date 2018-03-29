@@ -23,11 +23,12 @@ class CombatantGroup extends Component {
     }
 
     render() {
-        const { Combatants, InitiativeRoll } = this.props.parentObj
+        const { parentObj, index } = this.props
+        const { Combatants, InitiativeRoll } = parentObj
         return (
             <tbody>
-            <td className="groupMonsterBumper"></td>
-            <tr>
+                <td className="groupMonsterBumper"></td>
+                <tr>
                     <th
                         className="col-xs-1"
                         scope="row">
@@ -59,8 +60,23 @@ class CombatantGroup extends Component {
                         }
                     </th>
                     <th
-                    className="col-xs-11">
+                        className="col-xs-9">
                         Monsters
+                    </th>
+                    <th className="col-xs-2">
+                        <FontAwesome
+                            // onClick={() => this.props.clearCombatants()}
+                            className="clearCombatantGroup"
+                            name='minus-circle'
+                            size='2x'
+                            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                this.props.removeCombatant({ combatant: parentObj, index: index })
+                                this.props.toggleGroupingMonsters(false)
+                            }
+                            }
+                        />
                     </th>
 
                 </tr>
@@ -105,6 +121,9 @@ function mapDispatchToProps(dispatch) {
     return {
         changeCombatantInitiative: combatant =>
             dispatch(actions.changeCombatantInitiative(combatant)),
+        removeCombatant: combatant =>
+            dispatch(actions.removeCombatant(combatant)),
+        toggleGroupingMonsters: payload => dispatch(actions.toggleGroupingMonsters(payload)),
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CombatantGroup);
