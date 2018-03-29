@@ -226,7 +226,7 @@ export default function(state = INITIAL_STATE, action) {
     // property
     if (!!action.payload) {
       newCombatantList = [...state.CombatantList]
-      const groupedMonsters = {InitiativeRoll: 0, Combatants: [], Group: true}
+      const groupedMonsters = {InitiativeRoll: d20(), Combatants: [], Group: true}
       groupedMonsters.Combatants = newCombatantList.filter( monster => {
         if (monster.Challenge) {
           return monster
